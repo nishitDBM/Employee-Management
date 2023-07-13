@@ -44,10 +44,17 @@ const login = async (req,res) =>{
     const data = req.body
     const {email,password} = data
 
+    if(!email) return res.status(400).send({status:false,msg:"email is required"})
+
     const finduser = await usermodel.findOne({email:email})
     if(!finduser){
-        return res.status(401).send({status:false,msg:"wrong email"})
+        return res.status(401).send({status:false,msg:"wrong email invalid crdetial"})
     }
+     
+    if(password){
+        return res.status(400).send({status:false,msg:"password is required"})
+    }
+
 
     let token = jwt.sign({userId:finduser._id}
         ,'verifysecretkey'
@@ -60,3 +67,5 @@ const login = async (req,res) =>{
       return res.status(500).send({status:false,message:error.msg})  
     }
 }
+
+module.export = {register,login}
