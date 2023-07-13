@@ -9,7 +9,7 @@ const register = async (req,res) =>{
     const {name,email,password} = data
 
     if(Object.keys(data).length==0){
-        return res.status(400).send({status:false,msg:"data is required"})
+        return res.status(400).send({status:false,msg:"data is required"});
     }
     if(!name){
         return res.status(400).send({status:false,msg:"name is required"})
