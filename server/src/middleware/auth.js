@@ -1,33 +1,28 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
-const authenticate = async (req,res,next) =>{
-    try {
-        let bearertoken = req.headers.authorization
-
-        if(!bearertoken)
-        return res
-        .status(401)
-        .send({ status: false, message: "Token is required" });
-
-        let token = bearertoken.split(" ")[1]
-
-        jwt.verify(token,'secretkey',function(error,decodedToken){
-            if(error){
-                let message =
-          error.message == "jwt expired"
-            ? "token expired , login again!"
-            : "Invalid token";
-        return res.status(401).send({ status: false, message: message });
-            }
-
-            req.decodedToken = decodedToken;
-            console.log("decoded", decodedToken)
-            next();
-        })
-        
-    } catch (error) {
-        return res.status(500).send({status:false,msg:error.msg})
+const authenticate = async function (req, res, next) {
+  try {
+    let token = req.headers["x-api-key"];
+    console.log(token)
+    if (!token) {
+      return res
+        .status(400)
+        .send({ status: false, message: "Token must be present!" });
     }
-}
 
-module.exports ={authenticate}
+    jwt.verify(token, "secretkey ", function (err, decodedtoken) {
+      if (err) {
+        return res
+          .status(401)
+          .send({ status: false, message:"Token is invalid!" });
+      } else {
+        req.token = decodedtoken;
+        next();
+      }
+    });
+  } catch (error) {
+    return res.status(500).send({ status: false, message: error.message });
+  }
+};
+
+module.exports = {authenticate};

@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import "./login.css"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import axios from "axios"
 
 
@@ -45,6 +45,7 @@ const Login = ({ updateUser}) => {
             <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
             <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
             <div className="button" onClick={login}>Login</div>
+            <Link to="../homepage/homepage">homepage</Link>
             <div>or</div>
             <div className="button" onClick={() => history.push("/register")}>Register</div>
         </div>

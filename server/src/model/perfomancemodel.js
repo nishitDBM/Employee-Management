@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const objectId = mongoose.Schema.Types.ObjectId
 
 const perfomanceSchema = new mongoose.Schema({
-    performId :{
+    adminId :{
         type:objectId,
         required:true,
         ref:"admin"

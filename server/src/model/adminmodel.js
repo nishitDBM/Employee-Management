@@ -10,7 +10,7 @@ const adminSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    userId :{
+    userid :{
         type:objectId,
         required:true,
         ref:"user"
