@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const instance = axios.create({
-  baseUrl: "localhost:3001",
+  baseUrl: "http://localhost:9000",
 });
 
 export default instance;

@@ -1,7 +1,8 @@
 import React, {useState} from "react"
 import "./login.css"
-import instance from "../../api/apiConfig"
 import { useHistory } from "react-router-dom"
+import axios from "axios"
+
 
 const Login = ({ updateUser}) => {
 
@@ -21,12 +22,17 @@ const Login = ({ updateUser}) => {
     }
 
     const login = async () => {
+        const { email, password } = user;
+        let body = {
+          email,
+          password
+          
+        };
            try {
         
-           const response = await instance.post("/register", user)       
-            alert(response.data.message)
-            
-            history.push("/")
+           const response = await axios.post("http://localhost:9000/userLogin", body)       
+            console.log(response)
+            // history.push("/")
         } catch (error) {
             console.log(error)
         }

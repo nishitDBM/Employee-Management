@@ -32,4 +32,4 @@ const performGet = async (req,res) =>{
     }
 }
 
-module.export = {perfomAdd,performGet}
+module.exports = {perfomAdd,performGet}
