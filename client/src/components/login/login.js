@@ -1,7 +1,8 @@
 import React, {useState} from "react"
 import "./login.css"
-import instance from "../../api/apiConfig"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
+import axios from "axios"
+
 
 const Login = ({ updateUser}) => {
 
@@ -21,12 +22,17 @@ const Login = ({ updateUser}) => {
     }
 
     const login = async () => {
+        const { email, password } = user;
+        let body = {
+          email,
+          password
+          
+        };
            try {
         
-           const response = await instance.post("/register", user)       
-            alert(response.data.message)
-            
-            history.push("/")
+           const response = await axios.post("http://localhost:9000/userLogin", body)       
+            console.log(response)
+            // history.push("/")
         } catch (error) {
             console.log(error)
         }
@@ -39,6 +45,7 @@ const Login = ({ updateUser}) => {
             <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
             <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
             <div className="button" onClick={login}>Login</div>
+            <Link to="../homepage/homepage">homepage</Link>
             <div>or</div>
             <div className="button" onClick={() => history.push("/register")}>Register</div>
         </div>
