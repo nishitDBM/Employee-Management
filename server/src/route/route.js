@@ -8,8 +8,8 @@ const {authenticate} = require('../middleware/auth')
  
 
 // user
-router.post('/userRegister',user.register)
-router.post('/userLogin',user.login)
+router.post('/userRegister',register)
+router.post('/userLogin',login)
 
 // admin
 router.post('/adminUser',addAdmin,authenticate)
